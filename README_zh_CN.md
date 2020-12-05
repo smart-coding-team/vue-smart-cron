@@ -1,18 +1,18 @@
-# vue-cron-generator
+# vue-smart-cron
 
-> 一个基于Vue&Element-UI构建的在线Cron表达式生成器 [English](./README.md) [在线demo](https://ldang264.github.io/vue-cron-generator/dist/index.html)  
+> 一个基于Vue&Element-UI构建的在线Cron表达式生成器 [English](./README.md) [在线demo](https://ldang264.github.io/vue-smart-cron/dist/index.html)  
 
 **使用的项目**
 >👉 Attemper: 分布式多租户的支持流程编排的任务调度平台(用之作为cron表达式生成器) 👈
 >>[Github](https://github.com/attemper/attemper)  
 >>[Gitee](https://gitee.com/attemper/attemper)
 
-![预览](https://gitee.com/ldang264/vue-cron-generator/raw/master/resources/snapshot_zh_CN.png)
+![预览](https://gitee.com/ldang264/vue-smart-cron/raw/master/resources/snapshot_zh_CN.png)
 
 ## 使用(例子代码)
-- 下载依赖([npm](https://www.npmjs.com/package/vue-cron-generator))
+- 下载依赖([npm](https://www.npmjs.com/package/vue-smart-cron))
 ``` bash
-npm install vue-cron-generator
+npm install vue-smart-cron
 ```
 
 - [src/lang/index.js](https://github.com/attemper/attemper/blob/master/attemper-admin/src/lang/index.js)  
@@ -58,7 +58,7 @@ import Vue from 'vue'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-import 'vue-cron-generator/src/styles/global.less'
+import 'vue-smart-cron/src/styles/global.less'
 
 import App from './App'
 
@@ -91,8 +91,8 @@ new Vue({
 </template>
 
 <script>
-import CronInput from 'vue-cron-generator/src/components/cron-input'
-import { DEFAULT_CRON_EXPRESSION } from 'vue-cron-generator/src/constant/filed'
+import CronInput from 'vue-smart-cron/src/components/cron-input'
+import { DEFAULT_CRON_EXPRESSION } from 'vue-smart-cron/src/constant/filed'
 
 export default {
   name: 'App',
@@ -134,7 +134,7 @@ export default {
 
 ``` bash
 # 下载依赖
-npm install vue-cron-generator
+npm install vue-smart-cron
 
 # 服务启动在localhost:8080
 npm run dev
