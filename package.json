@@ -1,8 +1,8 @@
 {
-  "name": "vue-cron-generator",
+  "name": "vue-smart-cron",
   "description": "a project using vue,element-ui to generate cron expression",
-  "version": "0.2.0-SNAPSHOT",
-  "author": "ldang264 <820704815@qq.com>",
+  "version": "0.3.0-SNAPSHOT",
+  "author": "wuque <wuque201888@qq.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
@@ -30,27 +30,36 @@
     "crontab"
   ],
   "dependencies": {
-    "element-ui": "2.5.4",
-    "vue": "2.5.11",
-    "vue-i18n": "8.8.2"
+    "core-js": "^3.8.0",
+    "cron-parser": "^2.18.0",
+    "element-ui": "2.13.2",
+    "vue": "2.6.11",
+    "vue-i18n": "8.15.3"
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
   ],
+  "engines": {
+    "node": ">=8.9",
+    "npm": ">= 3.0.0"
+  },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "3.0.1",
-    "@vue/cli-plugin-eslint": "3.0.1",
-    "@vue/cli-plugin-unit-mocha": "3.0.1",
-    "@vue/cli-service": "3.0.1",
-    "@vue/eslint-config-standard": "3.0.0-beta.10",
-    "@vue/test-utils": "1.0.0-beta.10",
+    "@vue/cli-plugin-babel": "4.4.4",
+    "@vue/cli-plugin-eslint": "4.4.4",
+    "@vue/cli-plugin-unit-jest": "4.4.4",
+    "@vue/cli-service": "4.4.4",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "eslint": "^7.15.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-vue": "^7.2.0",
     "chai": "4.1.2",
+    "cli-plugin-eslint": "^0.1.0",
     "eslint-plugin-cypress": "2.0.1",
     "less": "2.7.3",
     "less-loader": "4.0.5",
     "lint-staged": "6.0.0",
-    "vue-template-compiler": "2.5.11"
+    "vue-template-compiler": "2.6.11"
   }
 }

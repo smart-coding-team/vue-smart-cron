@@ -25,6 +25,10 @@ export default {
     tagError: 'Tag Error ',
     numError: 'Number Error ',
     use: 'Use',
+    time: 'Time',
+    openPreview: 'Open Preview',
+    closePreview: 'Close Preview',
+    cronExpressionError:"Cron Expression Error",
     inputPlaceholder: 'Cron Expression'
   },
   custom: {

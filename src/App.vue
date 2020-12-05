@@ -12,7 +12,7 @@
         </el-select>
       </el-col>
       <el-col :span="6" :offset="1">
-        <cron-input v-model="cron" :size="size" @change="change" @reset="reset"/>
+        <cron-input v-model="cron" :size="size" @change="change" @reset="reset" @preCron="preCron"/>
       </el-col>
     </el-row>
   </div>
@@ -31,6 +31,7 @@ export default {
     return {
       cron: DEFAULT_CRON_EXPRESSION,
       size: 'mini',
+      preTimeList:[],
       sizes: [
         'mini',
         'small',
@@ -44,6 +45,12 @@ export default {
     },
     reset(cron) {
       this.cron = DEFAULT_CRON_EXPRESSION
+    },
+    preview(cron){
+      console.log("cron:"+cron)
+    },
+    preCron(result){
+      console.log("result:",result)
     }
   }
 }

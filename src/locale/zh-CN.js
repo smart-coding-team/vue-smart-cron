@@ -25,6 +25,10 @@ export default {
     tagError: '表达式不正确',
     numError: '含有非法数字',
     use: '使用',
+    openPreview: '预测',
+    closePreview: '关闭',
+    cronExpressionError:"Cron表达式 预测失败",
+    time: '次',
     inputPlaceholder: 'Cron表达式'
   },
   custom: {

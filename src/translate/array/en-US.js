@@ -1,23 +1,15 @@
 export const cases = [
     {
-      label: 'Every second',
-      value: '* * * * * ?'
+      label: 'Every 10 minutes',
+      value: '0 */10 * * * ?'
     },
     {
-      label: 'Every 30 minutes',
-      value: '0 */30 * * * ?'
+      label: 'Every hour at minutes 15, 30',
+      value: '0 15,30 * * * ?'
     },
     {
-      label: 'Every hour at minutes 15, 30 and 45',
-      value: '0 15,30,45 * * * ?'
-    },
-    {
-      label: 'Every even hour',
-      value: '0 0 0/2 * * ?'
-    },
-    {
-      label: 'Every uneven hour',
-      value: '0 0 1/2 * * ?'
+      label: 'Every day at midnight - 11pm',
+      value: '0 0 23 * * ?'
     },
     {
       label: 'Every day at midnight - 12am',

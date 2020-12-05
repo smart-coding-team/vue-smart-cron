@@ -1,61 +1,86 @@
 <template>
   <div>
     <el-popover v-model="visible">
-      <cron v-model="cron_" :size="size" @change="change"/>
-      <el-input slot="reference" v-model="cron_" :placeholder="$t('common.inputPlaceholder')" :size="size">
-        <el-button slot="append" icon="el-icon-refresh" @click="reset"/>
+      <cron
+        v-model="cron_"
+        :size="size"
+        :preTimes="preTimes"
+        @change="change"
+      />
+      <el-input
+        slot="reference"
+        v-model="cron_"
+        :placeholder="$t('common.inputPlaceholder')"
+        :size="size"
+      >
+        <el-button slot="append" icon="el-icon-refresh" @click="reset" />
       </el-input>
     </el-popover>
   </div>
 </template>
-
 <script>
-import Cron from './cron'
-import { DEFAULT_CRON_EXPRESSION } from '../constant/filed'
+import Cron from "./cron";
+import { DEFAULT_CRON_EXPRESSION } from "../constant/filed";
+import dateFormat from "./format-date";
+import CronParser from "cron-parser";
 export default {
-  name: 'CronInput',
+  name: "CronInput",
   components: {
-    Cron
+    Cron,
   },
   props: {
     value: {
       type: String,
-      default: DEFAULT_CRON_EXPRESSION
+      default: DEFAULT_CRON_EXPRESSION,
     },
     size: {
       type: String,
-      default: 'mini'
-    }
+      default: "mini",
+    },
+    preTimes: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
+    num: {
+      type: Number,
+      default: 1,
+    },      
+
   },
   data() {
     return {
-      cron_: '',
-      visible: false
-    }
+      cron_: "",
+      visible: false,
+    };
   },
   watch: {
     value(val) {
-      this.setCron(val)
-    }
+      this.setCron(val);
+    },
   },
   created() {
-    this.setCron(this.value)
+    this.setCron(this.value);
   },
   methods: {
     setCron(newValue) {
       if (!newValue || newValue.trim().length < 11) {
-        this.$message.error(this.$t('common.wordNumError'))
-        return
+        this.$message.error(this.$t("common.wordNumError"));
+        return;
       }
-      this.cron_ = newValue
+      this.cron_ = newValue;
     },
     change(cron) {
-      this.cron_ = cron
-      this.$emit('change', cron)
+      this.cron_ = cron;
+      this.$emit("change", cron);
     },
     reset() {
-      this.$emit('reset', this.value)
-    }
-  }
-}
+      this.$emit("reset", this.value);
+    },
+    preCron(cron) {
+  
+    },
+  },
+};
 </script>

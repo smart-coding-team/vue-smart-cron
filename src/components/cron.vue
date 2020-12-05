@@ -3,108 +3,178 @@
     <el-row class="cron-row">
       <el-row :gutter="2">
         <el-col :span="3">
-          <el-input ref="input1" v-model="tag.second" :size="size" @focus="activeTabName='1'"/>
-        </el-col>
-        <el-col :span="4">
-          <el-input ref="input2" v-model="tag.minute" :size="size" @focus="activeTabName='2'"/>
-        </el-col>
-        <el-col :span="4">
-          <el-input ref="input3" v-model="tag.hour" :size="size" @focus="activeTabName='3'"/>
-        </el-col>
-        <el-col :span="4">
-          <el-input ref="input4" v-model="tag.dayOfMonth" :size="size" @focus="activeTabName='4'"/>
+          <el-input
+            ref="input1"
+            v-model="tag.second"
+            :size="size"
+            @focus="activeTabName = '1'"
+          />
         </el-col>
         <el-col :span="3">
-          <el-input ref="input5" v-model="tag.month" :size="size" @focus="activeTabName='5'"/>
+          <el-input
+            ref="input2"
+            v-model="tag.minute"
+            :size="size"
+            @focus="activeTabName = '2'"
+          />
+        </el-col>
+        <el-col :span="4">
+          <el-input
+            ref="input3"
+            v-model="tag.hour"
+            :size="size"
+            @focus="activeTabName = '3'"
+          />
         </el-col>
         <el-col :span="3">
-          <el-input ref="input6" v-model="tag.dayOfWeek" :size="size" @focus="activeTabName='6'"/>
+          <el-input
+            ref="input4"
+            v-model="tag.dayOfMonth"
+            :size="size"
+            @focus="activeTabName = '4'"
+          />
         </el-col>
         <el-col :span="3">
-          <el-input ref="input7" v-model="tag.year" :size="size" @focus="activeTabName='7'"/>
+          <el-input
+            ref="input5"
+            v-model="tag.month"
+            :size="size"
+            @focus="activeTabName = '5'"
+          />
+        </el-col>
+        <el-col :span="3">
+          <el-input
+            ref="input6"
+            v-model="tag.dayOfWeek"
+            :size="size"
+            @focus="activeTabName = '6'"
+          />
+        </el-col>
+        <el-col :span="3" v-if="tag.year != ''">
+          <el-input
+            ref="input7"
+            v-model="tag.year"
+            :size="size"
+            @focus="activeTabName = '7'"
+          />
+        </el-col>
+        <el-col :span="2">
+          <el-button
+            v-if="showCronBox"
+            :size="size"
+            type="primary"
+            @click="openPreviewCron"
+            >{{ $t("common.openPreview") }}</el-button
+          >
+          <el-button
+            v-else
+            :size="size"
+            type="primary"
+            @click="closePreviewCron"
+            >{{ $t("common.closePreview") }}</el-button
+          >
         </el-col>
       </el-row>
+      <div v-if="!showCronBox">
+        <div
+          style="margin-top: 5px; text-align: center"
+          v-for="(item, index) in preTimeList"
+          :key="index"
+        >
+          <strong style="color: #67c23a; font-size: 13px"
+            >{{ $t("common.nth") }}{{ index + 1
+            }}{{ $t("common.time") }}</strong
+          >: {{ item }}
+        </div>
+      </div>
     </el-row>
     <el-row class="cron-row">
       <el-tabs v-model="activeTabName" type="border-card">
         <el-tab-pane name="1">
-          <span slot="label">{{ $t('second.title') }}</span>
+          <span slot="label">{{ $t("second.title") }}</span>
           <second
             :tag="tag.second"
             :size="size"
-            @second-change="changeSecond"/>
+            @second-change="changeSecond"
+          />
         </el-tab-pane>
         <el-tab-pane name="2">
-          <span slot="label">{{ $t('minute.title') }}</span>
+          <span slot="label">{{ $t("minute.title") }}</span>
           <minute
             :tag="tag.minute"
             :size="size"
-            @minute-change="changeMinute"/>
+            @minute-change="changeMinute"
+          />
         </el-tab-pane>
         <el-tab-pane name="3">
-          <span slot="label">{{ $t('hour.title') }}</span>
-          <hour
-            :tag="tag.hour"
-            :size="size"
-            @hour-change="changeHour"/>
+          <span slot="label">{{ $t("hour.title") }}</span>
+          <hour :tag="tag.hour" :size="size" @hour-change="changeHour" />
         </el-tab-pane>
         <el-tab-pane name="4">
-          <span slot="label">{{ $t('dayOfMonth.title') }}</span>
+          <span slot="label">{{ $t("dayOfMonth.title") }}</span>
           <day-of-month
             :tag="tag.dayOfMonth"
             :size="size"
-            @day-of-month-change="changeDayOfMonth"/>
+            @day-of-month-change="changeDayOfMonth"
+          />
         </el-tab-pane>
         <el-tab-pane name="5">
-          <span slot="label">{{ $t('month.title') }}</span>
-          <month
-            :tag="tag.month"
-            :size="size"
-            @month-change="changeMonth"/>
+          <span slot="label">{{ $t("month.title") }}</span>
+          <month :tag="tag.month" :size="size" @month-change="changeMonth" />
         </el-tab-pane>
         <el-tab-pane name="6">
-          <span slot="label">{{ $t('dayOfWeek.title') }}</span>
+          <span slot="label">{{ $t("dayOfWeek.title") }}</span>
           <day-of-week
             :tag="tag.dayOfWeek"
             :size="size"
-            @day-of-week-change="changeDayOfWeek"/>
+            @day-of-week-change="changeDayOfWeek"
+          />
         </el-tab-pane>
         <el-tab-pane name="7">
-          <span slot="label">{{ $t('year.title') }}</span>
-          <year
-            :tag="tag.year"
-            :size="size"
-            @year-change="changeYear"/>
+          <span slot="label">{{ $t("year.title") }}</span>
+          <year :tag="tag.year" :size="size" @year-change="changeYear" />
         </el-tab-pane>
         <el-tab-pane name="8">
-          <span slot="label">{{ $t('common.help') }}</span>
+          <span slot="label">{{ $t("common.help") }}</span>
           <div class="cell-div">
-            <span style="margin-right: 10px;">
-              <el-button :disabled="!sample || sample.trim().length < 11" :size="size" type="primary" @click="changeTime(sample)">{{ $t('common.use') }}</el-button>
-            </span>
+            <!-- <span style="margin-right: 10px">
+              <el-button
+                :disabled="!sample || sample.trim().length < 11"
+                :size="size"
+                type="primary"
+                @click="changeTime(sample)"
+                >{{ $t("common.use") }}</el-button
+              >
+            </span> -->
             <el-select
               v-model="sample"
               :size="size"
               :placeholder="$t('common.placeholder')"
               :filter-method="filterCase"
-              style="min-width: 320px;"
-              filterable>
+              style="min-width: 230px"
+              @change="changeTime(sample)"
+              filterable
+            >
               <el-option
                 v-for="item in cases"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value">
+                :value="item.value"
+              >
                 <span style="float: left">{{ item.label }}</span>
-                <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
+                <span style="float: right; color: #8492a6; font-size: 13px">{{
+                  item.value
+                }}</span>
               </el-option>
             </el-select>
-            <span style="margin-left: 5px;">
+            <span style="margin-left: 5px">
               {{ sample }}
             </span>
           </div>
           <div v-for="(item, index) in timeUnits" :key="index">
-            {{ item }}:{{ $t('common.valTip') }}<strong>{{ vals[index] }}</strong>
-            {{ $t('common.symbolTip') }}<strong>{{ symbols[index] }}</strong>
+            {{ item }}:{{ $t("common.valTip")
+            }}<strong>{{ vals[index] }}</strong> {{ $t("common.symbolTip")
+            }}<strong>{{ symbols[index] }}</strong>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -113,13 +183,15 @@
 </template>
 
 <script>
-import Second from './time/second'
-import Minute from './time/minute'
-import Hour from './time/hour'
-import DayOfMonth from './time/dayOfMonth'
-import Month from './time/month'
-import Year from './time/year'
-import DayOfWeek from './time/dayOfWeek'
+import Second from "./time/second";
+import Minute from "./time/minute";
+import Hour from "./time/hour";
+import DayOfMonth from "./time/dayOfMonth";
+import Month from "./time/month";
+import Year from "./time/year";
+import DayOfWeek from "./time/dayOfWeek";
+import CronParser from "cron-parser";
+import dateFormat from "./format-date";
 import {
   EMPTY,
   EVERY,
@@ -127,12 +199,11 @@ import {
   BASE_SYMBOL,
   DAY_OF_MONTH_SYMBOL,
   DAY_OF_WEEK_SYMBOL,
-  DEFAULT_CRON_EXPRESSION
-} from '../constant/filed'
-import { loadArray } from '../translate'
-
+  DEFAULT_CRON_EXPRESSION,
+} from "../constant/filed";
+import { loadArray } from "../translate";
 export default {
-  name: 'Cron',
+  name: "Cron",
   components: {
     DayOfWeek,
     Year,
@@ -140,17 +211,23 @@ export default {
     DayOfMonth,
     Hour,
     Minute,
-    Second
+    Second,
   },
   props: {
     value: {
       type: String,
-      default: DEFAULT_CRON_EXPRESSION
+      default: DEFAULT_CRON_EXPRESSION,
     },
     size: {
       type: String,
-      default: 'mini'
-    }
+      default: "mini",
+    },
+    preTimes: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
   },
   data() {
     return {
@@ -161,112 +238,195 @@ export default {
         dayOfMonth: EVERY,
         month: EVERY,
         dayOfWeek: UNFIXED,
-        year: EMPTY
+        year: EMPTY,
       },
-      activeTabName: '1',
+      activeTabName: "1",
       timeUnits: [
-        this.$t('second.title'), this.$t('minute.title'), this.$t('hour.title'), this.$t('dayOfMonth.title'),
-        this.$t('month.title'), this.$t('dayOfWeek.title'), this.$t('year.title')
+        this.$t("second.title"),
+        this.$t("minute.title"),
+        this.$t("hour.title"),
+        this.$t("dayOfMonth.title"),
+        this.$t("month.title"),
+        this.$t("dayOfWeek.title"),
+        this.$t("year.title"),
       ],
       vals: [
-        this.$t('second.val'), this.$t('minute.val'), this.$t('hour.val'), this.$t('dayOfMonth.val'),
-        this.$t('month.val'), this.$t('dayOfWeek.val'), this.$t('year.val')
+        this.$t("second.val"),
+        this.$t("minute.val"),
+        this.$t("hour.val"),
+        this.$t("dayOfMonth.val"),
+        this.$t("month.val"),
+        this.$t("dayOfWeek.val"),
+        this.$t("year.val"),
       ],
       symbols: [
-        BASE_SYMBOL, BASE_SYMBOL, BASE_SYMBOL, DAY_OF_MONTH_SYMBOL, BASE_SYMBOL, DAY_OF_WEEK_SYMBOL, BASE_SYMBOL
+        BASE_SYMBOL,
+        BASE_SYMBOL,
+        BASE_SYMBOL,
+        DAY_OF_MONTH_SYMBOL,
+        BASE_SYMBOL,
+        DAY_OF_WEEK_SYMBOL,
+        BASE_SYMBOL,
       ],
-      sample: '',
+      sample: "",
       cases: [],
-      bakCases: []
-    }
+      showCronBox: true,
+      preTimeList: this.preTimes,
+      bakCases: [],
+    };
   },
   watch: {
     value(val) {
-      this.changeTime(val)
+      this.changeTime(val);
     },
     activeTabName(val) {
-      const input_ = this.$refs['input' + val]
+      const input_ = this.$refs["input" + val];
       if (input_) {
-        input_.focus()
+        input_.focus();
       }
     },
     tag: {
       handler(curVal, oldVal) {
-        this.changeCron()
+        this.changeCron();
+        this.closePreviewCron();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   created() {
-    this.loadConst()
-    this.changeTime(this.value)
+    this.loadConst();
+    this.changeTime(this.value);
   },
   methods: {
     changeSecond(tag) {
-      this.tag.second = tag
+      this.tag.second = tag;
     },
     changeMinute(tag) {
-      this.tag.minute = tag
+      this.tag.minute = tag;
     },
     changeHour(tag) {
-      this.tag.hour = tag
+      this.tag.hour = tag;
     },
     changeDayOfMonth(tag) {
-      this.tag.dayOfMonth = tag
+      this.tag.dayOfMonth = tag;
     },
     changeMonth(tag) {
-      this.tag.month = tag
+      this.tag.month = tag;
     },
     changeDayOfWeek(tag) {
-      this.tag.dayOfWeek = tag
+      this.tag.dayOfWeek = tag;
     },
     changeYear(tag) {
-      this.tag.year = tag
+      this.tag.year = tag;
     },
     changeCron() {
-      const cron = (this.tag.second + ' ' + this.tag.minute + ' ' + this.tag.hour + ' ' + this.tag.dayOfMonth + ' ' +
-          this.tag.month + ' ' + this.tag.dayOfWeek + ' ' + this.tag.year).trim()
-      this.$emit('change', cron)
+      const cron = (
+        this.tag.second +
+        " " +
+        this.tag.minute +
+        " " +
+        this.tag.hour +
+        " " +
+        this.tag.dayOfMonth +
+        " " +
+        this.tag.month +
+        " " +
+        this.tag.dayOfWeek +
+        " " +
+        this.tag.year
+      ).trim();
+      this.$emit("change", cron);
     },
     changeTime(newValue) {
       if (!newValue || newValue.trim().length < 11) {
-        this.$message.error(this.$t('common.wordNumError'))
-        return
+        this.$message.error(this.$t("common.wordNumError"));
+        return;
       }
-      const arr = newValue.trim().split(' ')
+      const arr = newValue.trim().split(" ");
       if (arr.length !== 6 && arr.length !== 7) {
-        this.$message.error(this.$t('common.wordNumError'))
-        return
+        this.$message.error(this.$t("common.wordNumError"));
+        return;
       }
-      this.tag.second = arr[0]
-      this.tag.minute = arr[1]
-      this.tag.hour = arr[2]
-      this.tag.dayOfMonth = arr[3]
-      this.tag.month = arr[4]
-      this.tag.dayOfWeek = arr[5]
-      this.tag.year = arr.length === 7 ? arr[6] : ''
+      this.tag.second = arr[0];
+      this.tag.minute = arr[1];
+      this.tag.hour = arr[2];
+      this.tag.dayOfMonth = arr[3];
+      this.tag.month = arr[4];
+      this.tag.dayOfWeek = arr[5];
+      this.tag.year = arr.length === 7 ? arr[6] : "";
     },
     filterCase(query) {
-      if (query !== '') {
-        this.loading = true
+      if (query !== "") {
+        this.loading = true;
         setTimeout(() => {
-          this.loading = false
-          this.cases = this.bakCases.filter(item => {
-            return item.label.toLowerCase()
-              .indexOf(query.toLowerCase()) !== -1 ||
-            item.value.toLowerCase()
-              .indexOf(query.toLowerCase()) !== -1
-          })
-        }, 100)
+          this.loading = false;
+          this.cases = this.bakCases.filter((item) => {
+            return (
+              item.label.toLowerCase().indexOf(query.toLowerCase()) !== -1 ||
+              item.value.toLowerCase().indexOf(query.toLowerCase()) !== -1
+            );
+          });
+        }, 100);
       } else {
-        this.cases = this.bakCases
+        this.cases = this.bakCases;
       }
     },
     loadConst() {
-      loadArray().then(array => {
-        this.bakCases = this.cases = array.cases
-      })
-    }
-  }
-}
+      loadArray().then((array) => {
+        this.bakCases = this.cases = array.cases;
+      });
+    },
+    openPreviewCron() {
+      const cron = (
+        this.tag.second +
+        " " +
+        this.tag.minute +
+        " " +
+        this.tag.hour +
+        " " +
+        this.tag.dayOfMonth +
+        " " +
+        this.tag.month +
+        " " +
+        this.tag.dayOfWeek
+      ).trim();
+      this.showCronBox = false;
+      this.preTimeList=this.preCron(cron, 5);
+      this.$emit("preview", cron);
+    },
+    closePreviewCron() {
+      this.showCronBox = true;
+    },
+    preCron(cron, num) {
+      num = num || 1;
+      const result = [];
+      if (cron == undefined || cron == "") {
+        return result;
+      }
+      let tempCron = "";
+      let emptyNum = 5;
+      for (let i = 0; i < cron.length && emptyNum > 0; i++) {
+        if (cron.charAt(i) == " ") {
+          emptyNum--;
+        }
+        tempCron = emptyNum + cron.charAt(i);
+      }
+      const options = {
+        currentDate: dateFormat(new Date()),
+      };
+
+      try {
+        const iter = CronParser.parseExpression(tempCron, options);
+        for (let i = 0; i < num; i++) {
+          result.push(dateFormat(new Date(iter.next())));
+        }
+        result;
+      } catch (e) {
+        console.error("parse cron expression error", e);
+        this.$message.error(this.$t("common.cronExpressionError"));
+      }
+      return result;
+    },
+  },
+};
 </script>
